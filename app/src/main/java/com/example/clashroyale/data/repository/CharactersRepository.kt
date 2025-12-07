@@ -1,9 +1,9 @@
-package com.example.navegacion.data.repository
+package com.example.clashroyale.data.repositorio
 
-import com.example.navegacion.data.client.ApiClient
+import com.example.clashroyale.data.client.ApiClient
 
-class CharacterRepository {
+class CartasRepositorio {
 
-    suspend fun getCharacters() =
-        ApiClient.api.getCharacters()
+    suspend fun obtenerCartas() =
+        ApiClient.api.getCartas()
 }
