@@ -1,11 +1,13 @@
-package com.example.navegacion.data.client
+package com.example.clashroyale.data.client
 
-import com.example.navegacion.data.model.CharacterResponse
+import com.example.clashroyale.data.model.CartasRespuesta
 import retrofit2.http.GET
 
 interface ApiService {
 
-    @GET("character")
-    suspend fun getCharacters(): CharacterResponse
+    @GET("v1/cards")
+    suspend fun getCartas(): CartasRespuesta
 }
+
+
 

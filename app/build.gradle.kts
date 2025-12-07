@@ -62,4 +62,15 @@ dependencies {
     implementation("androidx.compose.ui:ui:1.7.0")
     implementation("androidx.compose.material3:material3:1.3.0")
     implementation("androidx.navigation:navigation-compose:2.8.0")
+
+    // Retrofit + Gson Converter
+    implementation("com.squareup.retrofit2:retrofit:2.9.0")
+    implementation("com.squareup.retrofit2:converter-gson:2.9.0")
+
+    // OkHttp + Logging Interceptor
+    implementation("com.squareup.okhttp3:okhttp:4.11.0")
+    implementation("com.squareup.okhttp3:logging-interceptor:4.11.0")
+
+    // Coil para imágenes
+    implementation("io.coil-kt:coil-compose:2.4.0")
 }

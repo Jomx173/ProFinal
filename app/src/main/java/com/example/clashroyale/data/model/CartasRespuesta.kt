@@ -1,21 +1,17 @@
-package com.example.navegacion.data.model
+package com.example.clashroyale.data.model
 
-data class CharacterResponse(
-    val info: Info,
-    val results: List<Character>
+data class CartasRespuesta(
+    val items: List<Carta>
 )
 
-data class Info(
-    val count: Int,
-    val pages: Int,
-    val next: String?,
-    val prev: String?
-)
-
-data class Character(
+data class Carta(
+    val nombre: String,
     val id: Int,
-    val name: String,
-    val status: String,
-    val species: String,
-    val image: String
+    val costoElixir: Int?,
+    val urlIconos: UrlIconos?
 )
+
+data class UrlIconos(
+    val medio: String?
+)
+
