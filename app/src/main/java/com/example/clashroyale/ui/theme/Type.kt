@@ -1,13 +1,31 @@
 package com.example.clashroyale.ui.theme
 
 import androidx.compose.material3.Typography
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
+import com.example.clashroyale.R
 
 // Set of Material typography styles to start with
+val supercell = FontFamily(
+    Font(R.font.supercell_magic)
+)
 val Typography = Typography(
+    titleLarge = TextStyle(
+        fontFamily = supercell,
+        fontSize = 28.sp,
+        color = Color.White
+    ),
+    bodyLarge = TextStyle(
+        fontFamily = supercell,
+        fontSize = 18.sp,
+        color = Color.White
+    )
+)
+/*val Typography = Typography(
     bodyLarge = TextStyle(
         fontFamily = FontFamily.Default,
         fontWeight = FontWeight.Normal,
@@ -31,4 +49,4 @@ val Typography = Typography(
         letterSpacing = 0.5.sp
     )
     */
-)
+*/

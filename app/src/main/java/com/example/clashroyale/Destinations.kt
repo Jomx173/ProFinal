@@ -5,6 +5,9 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.List
 import androidx.compose.material.icons.filled.Star
+import com.example.clashroyale.data.model.Carta
+
+
 
 enum class Destinations(
     val route: String,
@@ -33,19 +36,7 @@ enum class Destinations(
         description = "Detalles de carta"
     ),
 
-    Eventos(
-        route = "eventos",
-        label = "Eventos",
-        icon = Icons.Default.Star,
-        description = "Eventos del juego"
-    ),
 
-    Ubicaciones(
-        route = "ubicaciones",
-        label = "Ubicaciones",
-        icon = Icons.Default.Star,
-        description = "Lugares del juego"
-    ),
 
     Jugador(
         route = "jugador",
@@ -55,5 +46,5 @@ enum class Destinations(
     );
 
     // 🔥 helper para construir ruta
-    fun buildDetailRoute(cardName: String) = "detail/$cardName"
+    fun buildDetailRoute(cardName: Carta) = "detail/$cardName"
 }

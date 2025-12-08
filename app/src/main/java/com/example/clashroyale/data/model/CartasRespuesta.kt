@@ -13,8 +13,7 @@ data class Carta(
     val name: String = "",
     val maxLevel: Int = 0,
     val rarity: String? = null,
-    val elixir: Int? = null,
-    val type: String? = null,
+    val elixirCost: Int? = null,
     val iconUrls: IconUrls = IconUrls()
 ) : Parcelable
 

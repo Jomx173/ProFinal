@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
@@ -14,18 +15,22 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.example.clashroyale.ui.pantallas.cartas.CartasGridScreen
-import com.example.clashroyale.ui.pantallas.detail.DetailScreen
+import com.example.clashroyale.Pantallas.Detail.DetailScreen
+import com.example.clashroyale.data.viewmodel.SharedCartaViewModel
 import com.example.clashroyale.ui.pantallas.home.HomeScreen
 import com.example.clashroyale.ui.pantallas.jugador.JugadorScreen
-import com.example.clashroyale.ui.theme.ClashRoyaleAppTheme
+
+
 
 @OptIn(ExperimentalMaterial3Api::class)
 class MainActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         setContent {
-            ClashRoyaleAppTheme {
+
+                val sharedVM: SharedCartaViewModel = viewModel()
                 val navController = rememberNavController()
 
                 Scaffold(
@@ -33,17 +38,19 @@ class MainActivity : ComponentActivity() {
                 ) { paddingValues ->
                     AppNavHost(
                         navController = navController,
+                        sharedVM = sharedVM,
                         modifier = Modifier.padding(paddingValues)
                     )
                 }
             }
         }
     }
-}
+
 
 @Composable
-fun AppNavHost(navController: NavHostController, modifier: Modifier = Modifier) {
-
+fun AppNavHost(navController: NavHostController,
+               sharedVM: SharedCartaViewModel,
+               modifier: Modifier = Modifier) {
     NavHost(
         navController = navController,
         startDestination = Destinations.Home.route,
@@ -59,8 +66,10 @@ fun AppNavHost(navController: NavHostController, modifier: Modifier = Modifier) 
 
         // CARTAS
         composable(route = Destinations.Cards.route) {
-            CartasGridScreen { cardName ->
-                navController.navigate(Destinations.Detail.buildDetailRoute(cardName))
+            CartasGridScreen { carta ->
+
+                sharedVM.setCarta(carta)
+                navController.navigate(Destinations.Detail.route)
             }
         }
 
@@ -69,8 +78,8 @@ fun AppNavHost(navController: NavHostController, modifier: Modifier = Modifier) 
             route = Destinations.Detail.route,
             arguments = listOf(navArgument("cardName") { type = NavType.StringType })
         ) { backStackEntry ->
-            val name = backStackEntry.arguments?.getString("cardName") ?: ""
-            DetailScreen(cardName = name)
+            val carta = sharedVM.cartaSeleccionada
+            DetailScreen(carta)
         }
 
         // JUGADOR

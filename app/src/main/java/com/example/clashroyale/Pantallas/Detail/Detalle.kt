@@ -1,61 +1,86 @@
-package com.example.clashroyale.ui.pantallas.detail
+package com.example.clashroyale.Pantallas.Detail
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import coil.compose.AsyncImage
+import androidx.compose.ui.text.font.Font
+import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.foundation.Image
+import com.example.clashroyale.data.model.Carta
+import com.example.clashroyale.R
+import com.example.clashroyale.ui.theme.supercell
 
 @Composable
-fun DetailScreen(cardName: String) {
+fun DetailScreen(carta: Carta?) {
 
-    Card(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(16.dp),
-        elevation = CardDefaults.cardElevation(8.dp)
+    if (carta == null) {
+        Text("No se encontró la carta")
+        return
+    }
+
+    Box(
+        modifier = Modifier.fillMaxSize()
     ) {
 
-        Column(
+        Image(
+            painter = painterResource(id = R.drawable.fondo_clash),
+            contentDescription = null,
+            modifier = Modifier.fillMaxSize(),
+            contentScale = ContentScale.Crop
+        )
+
+
+        Card(
             modifier = Modifier
-                .fillMaxWidth()
-                .padding(16.dp),
-            horizontalAlignment = Alignment.CenterHorizontally
+                .padding(20.dp)
+                .fillMaxWidth(),
+            colors = CardDefaults.cardColors(containerColor = Color(0xAA0F172A)), // semi transparente
+            elevation = CardDefaults.cardElevation(12.dp),
+            shape = RoundedCornerShape(20.dp)
         ) {
 
-            // Título del nombre de carta
-            Text(
-                text = cardName,
-                style = MaterialTheme.typography.headlineLarge,
-                color = Color(0xFFFFD700) // dorado estilo Clash Royale
-            )
+            Column(
+                modifier = Modifier
+                    .padding(20.dp)
+                    .fillMaxWidth(),
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
 
-            Spacer(modifier = Modifier.height(20.dp))
+                AsyncImage(
+                    model = carta.iconUrls.medium ?: "",
+                    contentDescription = carta.name,
+                    modifier = Modifier.size(180.dp)
+                )
 
-            // Datos temporales de ejemplo
-            Text(
-                text = "🔹 Rareza: (cargando ...)",
-                style = MaterialTheme.typography.bodyLarge
-            )
+                Spacer(Modifier.height(16.dp))
 
-            Spacer(modifier = Modifier.height(8.dp))
+                Text(text = carta.name,
+                    style = MaterialTheme.typography.titleLarge,
+                    color = Color.White,
+                    fontFamily = supercell
+                )
 
-            Text(
-                text = "🔹 Coste de Elixir: (cargando ...)",
-                style = MaterialTheme.typography.bodyLarge
-            )
+                Spacer(Modifier.height(10.dp))
 
-            Spacer(modifier = Modifier.height(8.dp))
-
-            Text(
-                text = "🔹 Tipo de carta: (cargando ...)",
-                style = MaterialTheme.typography.bodyLarge
-            )
+                Text("Rareza: ${carta.rarity}",
+                    color = Color.White)
+                Text("Elixir: ${carta.elixirCost}",
+                    color = Color.White)
+                Text("Nivel máximo: ${carta.maxLevel}",
+                    color = Color.White)
+            }
         }
     }
 }

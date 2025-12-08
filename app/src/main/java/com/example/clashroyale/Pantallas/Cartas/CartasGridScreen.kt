@@ -14,12 +14,14 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import coil.compose.AsyncImage
 import androidx.compose.ui.res.painterResource
 import com.example.clashroyale.R
+import com.example.clashroyale.data.model.Carta
 import com.example.clashroyale.data.viewmodel.CartasViewModel
+import com.example.clashroyale.ui.theme.supercell
 
 @Composable
 fun CartasGridScreen(
     viewModel: CartasViewModel = viewModel(),
-    onCardClick: (String) -> Unit = {}
+    onCardClick: (Carta) -> Unit = {}
 ) {
 
     val cartas by viewModel.cartas.collectAsState()
@@ -55,7 +57,7 @@ fun CartasGridScreen(
                         Card(
                             modifier = Modifier
                                 .fillMaxWidth()
-                                .clickable { onCardClick(carta.name) },
+                                .clickable { onCardClick(carta) },
                             elevation = CardDefaults.cardElevation(6.dp)
                         ) {
                             Column(
@@ -74,7 +76,8 @@ fun CartasGridScreen(
 
                                 Text(
                                     text = carta.name,
-                                    style = MaterialTheme.typography.titleMedium
+                                    style = MaterialTheme.typography.titleMedium,
+                                    fontFamily = supercell
                                 )
                             }
                         }
