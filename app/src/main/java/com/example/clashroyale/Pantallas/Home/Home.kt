@@ -37,11 +37,7 @@ fun HomeScreen(onNavigate: (String) -> Unit) {
                 Text("Ir a Cartas", fontFamily = supercell)
             }
 
-            Spacer(modifier = Modifier.height(16.dp))
 
-            Button(onClick = { onNavigate(Destinations.Jugador.route) }) {
-                Text("Buscar Jugador", fontFamily = supercell)
             }
         }
     }
-}
