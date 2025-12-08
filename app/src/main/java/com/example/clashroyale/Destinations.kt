@@ -36,13 +36,17 @@ enum class Destinations(
         icon = Icons.Default.Star,
         description = "Lugares del juego"
     ),
-
     Detail(
-    route = "detail",   //<--- ESTE NOMBRE IMPORTA
-    label = "Detalle",
-    icon = Icons.Default.Star,
-    description = "Detalles de carta"
+        route = "detail",
+        label = "Detalle",
+        icon = Icons.Default.Star,
+        description = "Detalles de carta"
+    ),
+    Jugador(
+        route = "jugador",
+        label = "Jugador",
+        icon = Icons.Default.Star,
+        description = "Buscar perfil de jugador"
     )
-
 
 }

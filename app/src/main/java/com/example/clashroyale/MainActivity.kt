@@ -8,26 +8,28 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
-import androidx.navigation.compose.NavHost
-import androidx.navigation.compose.composable
-import androidx.navigation.compose.rememberNavController
-import androidx.navigation.navArgument
 import androidx.navigation.NavType
+import androidx.navigation.compose.NavHost
+
+import androidx.navigation.compose.*
+import androidx.navigation.navArgument
 import com.example.clashroyale.ui.pantallas.cards.CardsScreen
 import com.example.clashroyale.ui.pantallas.detail.DetailScreen
 import com.example.clashroyale.ui.pantallas.home.HomeScreen
+import com.example.clashroyale.ui.pantallas.jugador.JugadorScreen
 import com.example.clashroyale.ui.theme.ClashRoyaleAppTheme
 
 @OptIn(ExperimentalMaterial3Api::class)
 class MainActivity : ComponentActivity() {
 
-    @OptIn(ExperimentalMaterial3Api::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
+
             ClashRoyaleAppTheme {
 
-                val navController: NavHostController = rememberNavController()
+                val navController = rememberNavController()
+                // Control para mostrar el título sin error
                 var selectedDestination by remember { mutableStateOf(Destinations.Home.ordinal) }
 
                 Scaffold(
@@ -35,12 +37,12 @@ class MainActivity : ComponentActivity() {
                         TopAppBar(
                             title = { Text(Destinations.entries[selectedDestination].label) }
                         )
-
                     }
-                ) { padding ->
+                ) { paddingValues ->
+
                     AppNavHost(
                         navController = navController,
-                        modifier = Modifier.padding(padding)
+                        modifier = Modifier.padding(paddingValues)
                     )
                 }
             }
@@ -59,7 +61,7 @@ fun AppNavHost(
         modifier = modifier
     ) {
 
-        // ✔ Pantalla de inicio con navegación
+        // ✔ Pantalla HOME con navegación
         composable(route = Destinations.Home.route) {
             HomeScreen { route ->
                 navController.navigate(route)
@@ -73,13 +75,18 @@ fun AppNavHost(
             }
         }
 
-        // ✔ Pantalla de detalle con parámetro
+        // ✔ Pantalla de detalle de carta con parámetro
         composable(
             route = "${Destinations.Detail.route}/{cardName}",
             arguments = listOf(navArgument("cardName") { type = NavType.StringType })
         ) { backStackEntry ->
             val name = backStackEntry.arguments?.getString("cardName") ?: ""
             DetailScreen(cardName = name)
+        }
+
+        // ⭐ NUEVA PANTALLA Jugador
+        composable(route = Destinations.Jugador.route) {
+            JugadorScreen()
         }
     }
 }

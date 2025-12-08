@@ -17,6 +17,7 @@ fun HomeScreen(onNavigate: (String) -> Unit) {
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
+
         Button(onClick = { onNavigate(Destinations.Cards.route) }) {
             Text("Ir a Cartas")
         }
@@ -31,6 +32,13 @@ fun HomeScreen(onNavigate: (String) -> Unit) {
 
         Button(onClick = { onNavigate(Destinations.Ubicaciones.route) }) {
             Text("Ver Ubicaciones")
+        }
+
+        Spacer(Modifier.height(16.dp))
+
+        // ⭐ Nuevo botón integrado aquí
+        Button(onClick = { onNavigate(Destinations.Jugador.route) }) {
+            Text("Buscar Jugador")
         }
     }
 }
