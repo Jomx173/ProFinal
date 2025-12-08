@@ -7,7 +7,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.example.clashroyale.Destinations   // IMPORTANTE
+import com.example.clashroyale.Destinations
 
 @Composable
 fun HomeScreen(onNavigate: (String) -> Unit) {
@@ -22,21 +22,20 @@ fun HomeScreen(onNavigate: (String) -> Unit) {
             Text("Ir a Cartas")
         }
 
-        Spacer(Modifier.height(16.dp))
+        Spacer(modifier = Modifier.height(16.dp))
 
         Button(onClick = { onNavigate(Destinations.Eventos.route) }) {
             Text("Ver Eventos")
         }
 
-        Spacer(Modifier.height(16.dp))
+        Spacer(modifier = Modifier.height(16.dp))
 
         Button(onClick = { onNavigate(Destinations.Ubicaciones.route) }) {
             Text("Ver Ubicaciones")
         }
 
-        Spacer(Modifier.height(16.dp))
+        Spacer(modifier = Modifier.height(16.dp))
 
-        // ⭐ Nuevo botón integrado aquí
         Button(onClick = { onNavigate(Destinations.Jugador.route) }) {
             Text("Buscar Jugador")
         }
